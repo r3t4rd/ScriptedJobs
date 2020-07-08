@@ -45,6 +45,7 @@ local function cCat(jobList)
 			print('[cats.lua] Successfully created category for [' .. n .. '] - ' .. a[n])
 		end
 	else
+		if table.HasValue(jCats, a) then return nil end
 		DarkRP.createCategory{
 			name = a,
 			categorises = "jobs",
@@ -53,7 +54,7 @@ local function cCat(jobList)
 			canSee = function(ply) return true end,
 			sortOrder = 0
 		}
-		print('[cats.lua] isnt valid or dosnt expist. Created manually cat for [' .. jobList .. ']')
+		print('[cats.lua] isnt valid or dosnt exsist. Created manually cat for [' .. jobList .. ']')
 	end
 end
 
@@ -79,7 +80,8 @@ local easyExample = {
 		"Easy Citizen", "Male Citizen", "Just yet another one citizen job"
 	},
 	category = "[Example: easy jobs]",
-	salary = 10
+	salary = 10,
+	cvar = "t"
 }
 local complexExample = {
 	name = "[Complex Example]",
@@ -89,6 +91,11 @@ local complexExample = {
 		"models/Humans/Group01/Male_01.mdl",
 		"models/Humans/Group01/Male_04.mdl",
 		"models/Barney.mdl",
+	},
+	weapons = {
+		"weapon_physgun",
+		"weapon_physgun",
+		"weapon_fists"
 	},
 	ranks = {
 		"Glock-man", "AK-man", "Fist-man"
@@ -100,33 +107,34 @@ local complexExample = {
 	},
 	category = "[Example: complex jobs]",
 	salary = 100,
-	cwmws = "mwst"
+	cvar = "mwst"
 }
 local function createJob(c)
-	local na, de, cn, co, mo, we, ra, ca, st, sa, ad, vt, lic, cc, cwm, cww, cws, cwmws = c.name, c.description, c.command, c.color, c.models, c.weapons, c.ranks, c.category, c.stats, c.salary, c.admin, c.vote, c.license, table.Count(ra), nil, nil, nil, c.cwmws or nil
+	local na, de, cn, co, mo, we, ra, ca, st, sa, ad, vt, lic, cc, cwm, cww, cws, cvar = c.name, c.description, c.command, c.color, c.models, c.weapons, c.ranks, c.category, c.stats, c.salary, c.admin, c.vote, c.license, table.Count(c.ranks), nil, nil, nil, c.cvar or nil
 	print('[jobs.lua] ' .. cn .. ' contains ' .. cc .. ' jobs.')
-
-	if !cwmws and string.match(cwmws, 'm') then if mo == istable(mo[n]) then cwm = mo[n] else cwm = { mo[n] } end end
-	if !cwmws and string.match(cwmws, 'w') then if we == istable(we[n]) then cww = we[n] else cww = { we[n] } end end
-	if !cwmws and string.match(cwmws, 's') then	if st == istable(st[n]) then cws = st[n] else cws = { st[n] } end end
-	for n = 1, ra do
-		if ra == nil or n > ra then return end
+	for n = 1, cc do
+		if ra == nil or n > cc then return end
 		local tn = "TEAM_" .. string.upper(cn) .. '_' .. ra[n]
-		local ti = ra .. ' - ' .. na
-		if !cwmws and string.match(cwmws, 't') then ti = ra end
+		local ti = ra[n] .. ' - ' .. na[n]
+		if cvar and string.match(cvar, 'm') then if mo == istable(mo[n]) then cwm = mo[n] else cwm = { mo[n] } end end
+		if cvar and string.match(cvar, 'w') then if we == istable(we[n]) then cww = we[n] else cww = { we[n] } end end
+		if cvar and string.match(cvar, 's') then if st == istable(st[n]) then cws = st[n] else cws = { st[n] } end end
+		if cvar and string.match(cvar, 't') then ti = ra[n] end
 		tn = DarkRP.createJob(ti, {
 			color = co or Color('255,0,0,255'),
 			model = cwm or mo,
 			description = de or [[]],
 			weapons = cww or we,
 			max = c.max or 0,
+			command = cn .. n or ti .. n or 'fakecmd' .. n,
 			salary = GAMEMODE.Config.normalsalary + (sa*n),
 			admin = ad or 0,
 			vote = vt or false,
 			hasLicense = lic or false,
 			candemote = dem or false,
-			category = ca or cCat(ca) or 'Other',
+			category = cCat(ca) or ca or 'Other',
 			PlayerSpawn = function(ply)
+				-- stats
 				-- finishme
 			end
 		})
