@@ -110,7 +110,11 @@ Organization ranks. Sort them from lowest rank to highest, elsewhere whole hiera
 
 ##### `category = {}`
 
+DarkRP category for created organization. If `nil` then create new for our organization.
+
 ##### `stats = {}`
+
+-- are they even resonable?
 
 ##### `sa = number`
 
