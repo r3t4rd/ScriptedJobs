@@ -142,11 +142,8 @@ local function createJob(c)
 	end
 end
 local function initJobs(tj)
-	print('shit')
 	if istable(tj) then
-		print('Its table')
 		for k, v in pairs(tj) do
-			print('shitshit')
 			createJob(v)
 		end
 	else
