@@ -47,7 +47,7 @@ That looks pretty heavy and not really understandable. Let's take a look how the
 
 ### Table
 
-##### local gangsters = {}
+##### `local gangsters = {}`
 
 Creates new organisation.
 You able to call it however you want and feel free to create them for any type of jobs you want. 
@@ -56,19 +56,19 @@ We're creating our new organization. Feel free to call it however you want. You 
 
 ### Keys
 
-##### name = "string"
+##### `name = "string"`
 
 Set the individual name for organization. Shows in scoreboard.
 
-##### command = "string"
+##### `command = "string"`
 
 Set the individual command for organization. **Must be unique** for each organization.
 
-##### color = Color(r,b,a,alpha)
+##### `color = Color(r,b,a,alpha)`
 
 Set color for organization. Shows in scoreboard and chat.
 
-##### models = {}
+##### `models = {}`
 
 Organization's models list. If you're using *unique* key, then feel free to create new table for each rank like this:
 ```lua
@@ -98,21 +98,21 @@ If not, then:
 	}
 ```
 
-##### weapons = {}
+##### `weapons = {}`
 
 Weapon list. Works same as models for *unique* key.
 Doesn't work with weapon names or other customs strings. Use only weapon class, please.
 **tip:** ##### LocalPlayer():GetActiveWeapon():GetClass()
 
-##### ranks = {}
+##### `ranks = {}`
 
 Organization ranks. Sort them from lowest rank to highest, elsewhere whole hierarchy will fuck up.
 
-##### category = {}
+##### `category = {}`
 
-##### stats = {}
+##### `stats = {}`
 
-##### sa = num
+##### `sa = number`
 
 Salary multiplier. Will increase salary for each rank:
 ```lua
@@ -126,7 +126,7 @@ Will result:
 	Rank3 = DefaultSalary + 300
 ```
 
-Increases via **salary** = *defaultSalary + (organization.salary * ogranization.ranks[number])*
+Increases via `**salary** = *defaultSalary + (organization.salary * ogranization.ranks[number])*`
 
 License
 ===
