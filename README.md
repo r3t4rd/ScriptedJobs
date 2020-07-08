@@ -52,4 +52,83 @@ That looks pretty heavy and not really understandable. Let's take a look how the
 Creates new organisation.
 You able to call it however you want and feel free to create them for any type of jobs you want. 
 
-We're creating our new organization. Feel free to call it however you want. You can create them for any type of jobs even for 
+We're creating our new organization. Feel free to call it however you want. You can create them for any type of jobs.
+
+### Keys
+
+##### name = "string"
+
+Set the individual name for organization. Shows in scoreboard.
+
+##### command = "string"
+
+Set the individual command for organization. **Must be unique** for each organization.
+
+##### color = Color(r,b,a,alpha)
+
+Set color for organization. Shows in scoreboard and chat.
+
+##### models = {}
+
+Organization's models list. If you're using *unique* key, then feel free to create new table for each rank like this:
+```lua
+	models = {
+		{'fake/path/model1.mdl', 'fake/path/model2.mdl', 'fake/path/model3.mdl'}, -- for rank1
+		{'fake/path/model4.mdl', 'fake/path/model5.mdl'} -- for rank2
+		'fake/path/model1.mdl' -- for rank3
+	}
+	ranks = {
+		"rank1", -- using model1.mdl, model2.mdl and model3.mdl
+		"rank2", -- using model4.mdl, model5.mdl
+		"rank3" -- just model1.mdl
+	}
+```
+
+If not, then:
+```lua
+	models = {
+		'fake/path/model1.mdl',
+		'fake/path/model2.mdl',
+		'fake/path/model3.mdl'
+	}
+	ranks = {
+		"rank1",
+		"rank2", -- they're using all models from models table
+		"rank3"
+	}
+```
+
+##### weapons = {}
+
+Weapon list. Works same as models for *unique* key.
+Doesn't work with weapon names or other customs strings. Use only weapon class, please.
+**tip:** ##### LocalPlayer():GetActiveWeapon():GetClass()
+
+##### ranks = {}
+
+Organization ranks. Sort them from lowest rank to highest, elsewhere whole hierarchy will fuck up.
+
+##### category = {}
+
+##### stats = {}
+
+##### sa = num
+
+Salary multiplier. Will increase salary for each rank:
+```lua
+	ranks = { "rank1", "rank2", "rank3"	},
+	sa = 100
+```
+Will result:
+```lua
+	rank1 = DefaultSalary + 100
+	rank2 = DefaultSalary + 200
+	Rank3 = DefaultSalary + 300
+```
+
+Increases via **salary** = *defaultSalary + (organization.salary * ogranization.ranks[number])*
+
+License
+===
+
+WTFPL, see [`LICENSE`](LICENSE) for details.
