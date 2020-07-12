@@ -35,7 +35,7 @@ local gangsters = {
 	stats = {
 		50, 50, 50, 50
 	},
-	sa = 100
+	salary = 100
 }
 createJobs(gangsters)
 ```
@@ -51,8 +51,6 @@ That looks pretty heavy and not really understandable. Let's take a look how the
 
 Creates new organisation.
 You able to call it however you want and feel free to create them for any type of jobs you want. 
-
-We're creating our new organization. Feel free to call it however you want. You can create them for any type of jobs.
 
 ### Keys
 
@@ -102,7 +100,7 @@ If not, then:
 
 Weapon list. Works same as models for *unique* key.
 Doesn't work with weapon names or other customs strings. Use only weapon class, please.
-**tip:** ##### LocalPlayer():GetActiveWeapon():GetClass()
+**tip:** ` LocalPlayer():GetActiveWeapon():GetClass()`
 
 ##### `ranks = {}`
 
@@ -114,7 +112,15 @@ DarkRP category for created organization. If `nil` then create new for our organ
 
 ##### `stats = {}`
 
--- are they even resonable?
+*-- are they even resonable?*
+
+##### `cvar = ""`
+
+Custom cvars:
+** - ** `m` - models (model1 for rank1, etc)
+** - ** `w` - weapons (weapon1 for rank1, etc)
+** - ** `s` - stats (statstable1 for rank1, etc)
+** - ** `t` - title (title will not produced with - [%orgname%])
 
 ##### `sa = number`
 
